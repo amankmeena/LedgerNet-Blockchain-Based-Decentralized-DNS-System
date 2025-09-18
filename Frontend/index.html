@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LedgerNet - Decentralized DNS</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ethers/5.7.2/ethers.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <h1 class="logo">🌐 LedgerNet</h1>
+                <p class="tagline">Decentralized DNS on Blockchain</p>
+                <div class="wallet-section">
+                    <button id="connectWallet" class="connect-btn">Connect Wallet</button>
+                    <div id="walletInfo" class="wallet-info hidden">
+                        <span id="walletAddress"></span>
+                        <button id="disconnectWallet" class="disconnect-btn">Disconnect</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Network Status -->
+            <div id="networkStatus" class="network-status hidden">
+                <span class="status-indicator"></span>
+                <span id="networkName">Connected to Ethereum</span>
+            </div>
+
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="register">Register Domain</button>
+                <button class="tab-btn" data-tab="resolve">Resolve Domain</button>
+                <button class="tab-btn" data-tab="manage">Manage Domains</button>
+            </div>
+
+            <!-- Register Domain Tab -->
+            <div id="register" class="tab-content active">
+                <div class="card">
+                    <h2>Register New Domain</h2>
+                    <form id="registerForm" class="form">
+                        <div class="form-group">
+                            <label for="domainName">Domain Name</label>
+                            <input type="text" id="domainName" placeholder="e.g., mywebsite.eth" required>
+                            <small class="form-help">Enter a unique domain name</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="ipAddress">IP Address</label>
+                            <input type="text" id="ipAddress" placeholder="e.g., 192.168.1.100" required>
+                            <small class="form-help">IPv4 or IPv6 address</small>
+                        </div>
+                        <div class="form-group">
+                            <div class="fee-info">
+                                <span>Registration Fee: <strong>0.01 ETH</strong></span>
+                                <span>Validity: <strong>1 Year</strong></span>
+                            </div>
+                        </div>
+                        <button type="submit" class="primary-btn" id="registerBtn">
+                            <span>Register Domain</span>
+                            <div class="loader hidden"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Resolve Domain Tab -->
+            <div id="resolve" class="tab-content">
+                <div class="card">
+                    <h2>Resolve Domain</h2>
+                    <form id="resolveForm" class="form">
+                        <div class="form-group">
+                            <label for="resolveDomain">Domain Name</label>
+                            <input type="text" id="resolveDomain" placeholder="e.g., mywebsite.eth" required>
+                        </div>
+                        <button type="submit" class="primary-btn" id="resolveBtn">
+                            <span>Resolve Domain</span>
+                            <div class="loader hidden"></div>
+                        </button>
+                    </form>
+                    <div id="resolveResult" class="result-card hidden">
+                        <h3>Resolution Result</h3>
+                        <div class="result-content">
+                            <div class="result-item">
+                                <span class="label">Domain:</span>
+                                <span id="resultDomain" class="value"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">IP Address:</span>
+                                <span id="resultIP" class="value"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Owner:</span>
+                                <span id="resultOwner" class="value"></span>
+                            </div>
+                            <div class="result-item">
+                                <span class="label">Expires:</span>
+                                <span id="resultExpiry" class="value"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Manage Domains Tab -->
+            <div id="manage" class="tab-content">
+                <div class="card">
+                    <h2>My Domains</h2>
+                    <button id="loadDomains" class="secondary-btn">
+                        <span>Load My Domains</span>
+                        <div class="loader hidden"></div>
+                    </button>
+                    <div id="domainsList" class="domains-list"></div>
+                </div>
+                
+                <div class="card">
+                    <h2>Update Domain</h2>
+                    <form id="updateForm" class="form">
+                        <div class="form-group">
+                            <label for="updateDomainName">Domain Name</label>
+                            <input type="text" id="updateDomainName" placeholder="e.g., mywebsite.eth" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="newIpAddress">New IP Address</label>
+                            <input type="text" id="newIpAddress" placeholder="e.g., 192.168.1.200" required>
+                        </div>
+                        <button type="submit" class="primary-btn" id="updateBtn">
+                            <span>Update Domain</span>
+                            <div class="loader hidden"></div>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <!-- Status Messages -->
+        <div id="statusMessages" class="status-messages"></div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="footer-content">
+                <p>&copy; 2025 LedgerNet. Decentralized DNS for the future.</p>
+                <div class="footer-links">
+                    <a href="#" onclick="showInfo()">About</a>
+                    <a href="#" onclick="showDocs()">Docs</a>
+                    <a href="#" onclick="showSupport()">Support</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Contract ABI (This would typically be imported from a separate file) -->
+    <script>
+        // Contract ABI and configuration will be set in app.js
+        window.CONTRACT_ADDRESS = "0x..."; // Replace with your deployed contract address
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
