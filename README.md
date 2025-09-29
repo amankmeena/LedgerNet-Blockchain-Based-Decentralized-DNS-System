@@ -98,7 +98,7 @@ LedgerNet aims to be the foundation for a truly decentralized web, empowering in
 4. Manage your domains through the dashboard
 5. Transfer or update domains as needed
 
-## Contract address / Transaction hash: 0x6d9A0548A9cBa0D00F9Ee4af4139020F39666A71
+## Contract address/Transaction hash: 0x6d9A0548A9cBa0D00F9Ee4af4139020F39666A71
 
 <img width="1920" height="901" alt="image" src="https://github.com/user-attachments/assets/eec3483c-74a0-4094-8d55-252302465e6d" />
 
