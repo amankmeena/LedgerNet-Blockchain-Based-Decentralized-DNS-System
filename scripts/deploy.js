@@ -5,14 +5,14 @@ const path = require("path");
 async function main() {
     console.log("🚀 Starting LedgerNet deployment...\n");
 
-    // Get the deployer account
+    // Get the deployer account here
     const [deployer] = await ethers.getSigners();
     
     console.log("📝 Deployment details:");
     console.log("   Deployer address:", deployer.address);
     console.log("   Account balance:", ethers.utils.formatEther(await deployer.getBalance()), "ETH");
     
-    // Get network information
+    // Get network information here
     const network = await ethers.provider.getNetwork();
     console.log("   Network:", network.name);
     console.log("   Chain ID:", network.chainId);
