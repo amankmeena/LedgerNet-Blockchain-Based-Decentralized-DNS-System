@@ -5,7 +5,7 @@ const path = require("path");
 async function main() {
     console.log("🚀 Starting LedgerNet deployment...\n");
 
-    // Get the deployer account here
+    // Get the deployer account
     const [deployer] = await ethers.getSigners();
     
     console.log("📝 Deployment details:");
