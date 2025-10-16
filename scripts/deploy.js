@@ -12,7 +12,7 @@ async function main() {
     console.log("   Deployer address:", deployer.address);
     console.log("   Account balance:", ethers.utils.formatEther(await deployer.getBalance()), "ETH");
     
-    // Get network information here
+    // Get network information
     const network = await ethers.provider.getNetwork();
     console.log("   Network:", network.name);
     console.log("   Chain ID:", network.chainId);
