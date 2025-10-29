@@ -33,7 +33,7 @@ class LedgerNetApp {
         this.setupTabNavigation();
     }
     
-    // Setup event listener
+    // Setup event listener here
     setupEventListeners() {
         document.getElementById('connectWallet').addEventListener('click', () => this.connectWallet());
         document.getElementById('disconnectWallet').addEventListener('click', () => this.disconnectWallet());
