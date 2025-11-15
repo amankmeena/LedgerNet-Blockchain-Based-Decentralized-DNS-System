@@ -16,7 +16,7 @@ contract LedgerNet {
         bool isActive;
     }
     
-    // Mapping from domain name to domain information
+    // Mapping from domain name to domain information here
     mapping(string => Domain) public domains;
     
     // Mapping to track domains owned by each address
