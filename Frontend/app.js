@@ -1,4 +1,4 @@
-// LedgerNet Frontend Application app.js here
+// LedgerNet Frontend Application app.js
 // Web3 integration here for decentralized DNS system
 
 class LedgerNetApp {
