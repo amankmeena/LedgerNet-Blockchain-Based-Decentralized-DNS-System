@@ -24,7 +24,7 @@ async function main() {
     const LedgerNet = await ethers.getContractFactory("LedgerNet");
     const ledgerNet = await LedgerNet.deploy();
     
-    // Wait for deployment to complete
+    // Wait for deployment to complete here
     await ledgerNet.deployed();
     
     console.log("✅ LedgerNet deployed successfully!");
