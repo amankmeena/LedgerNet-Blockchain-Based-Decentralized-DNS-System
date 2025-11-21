@@ -98,11 +98,6 @@ LedgerNet aims to be the foundation for a truly decentralized web, empowering in
 4. Manage your domains through the dashboard
 5. Transfer or update domains as needed
 
-## Contract address/Transaction hash: 0x6d9A0548A9cBa0D00F9Ee4af4139020F39666A71
-
-<img width="1920" height="901" alt="image" src="https://github.com/user-attachments/assets/eec3483c-74a0-4094-8d55-252302465e6d" />
-
-
 ## License
 
 This project is licensed under the MIT License - see the LICENSE file for details.
@@ -110,3 +105,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Support
 
 For support and questions, please join our community Discord or create an issue in this repository.
+
+## Contract address/Transaction hash: 0x709E8f13F0b823413CCeD0C33Aa5F3E2642d8fA9
+
+<img width="1411" height="694" alt="image" src="https://github.com/user-attachments/assets/d3cf1f65-70c2-4a8f-933b-042be37fe7be" />
