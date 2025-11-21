@@ -1,5 +1,5 @@
 const { ethers } = require("hardhat");
-const fs = require("fs"); // file handle here
+const fs = require("fs"); // file handle
 const path = require("path");
 
 async function main() {
