@@ -26,6 +26,8 @@ contract LedgerNet {
     event DomainRegistered(string indexed domainName, address indexed owner, string ipAddress);
     event DomainUpdated(string indexed domainName, string newIpAddress);
     event DomainTransferred(string indexed domainName, address indexed oldOwner, address indexed newOwner);
+    event DomainRenewed(string indexed domainName, uint256 newExpirationTime);
+    event DomainDeactivated(string indexed domainName);
     
     // Registration fee (in wei)
     uint256 public registrationFee = 0.01 ether;
@@ -220,5 +222,76 @@ contract LedgerNet {
         returns (bool) 
     {
         return !domains[_domainName].isActive || block.timestamp >= domains[_domainName].expirationTime;
+    }
+    
+    // ===== NEW FUNCTIONS =====
+    
+    /**
+     * @dev Renew domain registration for another period
+     * @param _domainName The domain name to renew
+     */
+    function renewDomain(string memory _domainName) 
+        external 
+        payable 
+        onlyDomainOwner(_domainName) 
+    {
+        require(msg.value >= registrationFee, "Insufficient renewal fee");
+        
+        // Extend expiration time by another registration period
+        domains[_domainName].expirationTime += REGISTRATION_PERIOD;
+        
+        emit DomainRenewed(_domainName, domains[_domainName].expirationTime);
+    }
+    
+    /**
+     * @dev Get time remaining until domain expiration
+     * @param _domainName The domain name to check
+     * @return Time remaining in seconds (0 if expired)
+     */
+    function getTimeUntilExpiration(string memory _domainName) 
+        external 
+        view 
+        returns (uint256) 
+    {
+        require(domains[_domainName].owner != address(0), "Domain does not exist");
+        
+        if (block.timestamp >= domains[_domainName].expirationTime) {
+            return 0;
+        }
+        
+        return domains[_domainName].expirationTime - block.timestamp;
+    }
+    
+    /**
+     * @dev Deactivate/release a domain before expiration
+     * @param _domainName The domain name to deactivate
+     */
+    function deactivateDomain(string memory _domainName) 
+        external 
+        onlyDomainOwner(_domainName) 
+    {
+        domains[_domainName].isActive = false;
+        
+        emit DomainDeactivated(_domainName);
+    }
+    
+    /**
+     * @dev Batch check availability of multiple domains
+     * @param _domainNames Array of domain names to check
+     * @return Array of boolean values indicating availability
+     */
+    function batchCheckAvailability(string[] memory _domainNames) 
+        external 
+        view 
+        returns (bool[] memory) 
+    {
+        bool[] memory availability = new bool[](_domainNames.length);
+        
+        for (uint i = 0; i < _domainNames.length; i++) {
+            availability[i] = !domains[_domainNames[i]].isActive || 
+                            block.timestamp >= domains[_domainNames[i]].expirationTime;
+        }
+        
+        return availability;
     }
 }
