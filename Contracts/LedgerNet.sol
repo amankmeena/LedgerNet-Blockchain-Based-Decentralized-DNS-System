@@ -2,7 +2,7 @@
 pragma solidity ^0.8.19;
 
 /**
- * @title LedgerNet
+ * @title Ledger Net
  * @dev Blockchain-based Decentralized DNS System
  * @author LedgerNet Team
  */
