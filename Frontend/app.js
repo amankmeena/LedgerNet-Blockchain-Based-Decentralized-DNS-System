@@ -9,7 +9,7 @@ class LedgerNetApp {
         this.userAccount = null;
         
         // Contract configuration -* UPDATE VALUES
-        this.contractAddress = "0x..."; // Replace with deployed contract address here
+        this.contractAddress = "0x..."; // Replace with deployed contract address
         this.contractABI = [
             "function registerDomain(string memory _domainName, string memory _ipAddress) external payable",
             "function updateDomain(string memory _domainName, string memory _newIpAddress) external",
